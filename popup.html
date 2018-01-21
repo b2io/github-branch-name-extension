@@ -4,10 +4,28 @@
 <style>
   button {
     background-color: #eff3f6;
+    border: 1px solid rgba(27, 31, 35, 0.2);
+    border-radius: 0.25em;
     color: #24292e;
+    cursor: pointer;
     font-size: 1em;
+    font-weight: 600;
     min-width: 150px;
     padding: 5px;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  button:hover,
+  button:active {
+    background-color: #e6ebf1;
+    border-color: rgba(27, 31, 35, 0.35);
+  }
+
+  button:active {
+    box-shadow: inset 0 0.15em 0.3em rgba(27, 31, 35, 0.15);
   }
 
 </style>

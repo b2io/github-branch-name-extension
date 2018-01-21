@@ -4,9 +4,16 @@
   "description":
     "Extension for generating a GitHub branch name from an issue's details and copying it to the clipboard.",
   "version": "1.0",
+  "icons": {
+    "16": "branch-icon-16.png",
+    "32": "branch-icon-32.png",
+    "48": "branch-icon-48.png",
+    "128": "branch-icon-128.png"
+  },
 
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
 
   "content_scripts": [
@@ -20,7 +27,7 @@
 
   "page_action": {
     "default_name": "Copy Branch Name",
-    "default_icon": "icon.png",
+    "default_icon": "branch-icon-16.png",
     "default_popup": "popup.html"
   }
 }

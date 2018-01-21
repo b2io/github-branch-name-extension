@@ -1,4 +1,4 @@
-var branchName = "default";
+var branchName = null;
 
 function updateBranchName(tabId) {
   chrome.pageAction.show(tabId); // TODO: Should not show all the time

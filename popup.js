@@ -7,5 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     copyToClipboard(branchName);
   }
 
+  // TODO: Display notification when branch has been copied
   button.addEventListener("click", copyBranchName);
 });

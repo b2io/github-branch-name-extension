@@ -1,13 +1,24 @@
 <!doctype html>
 <html>
 
+<style>
+  button {
+    background-color: #eff3f6;
+    color: #24292e;
+    font-size: 1em;
+    min-width: 150px;
+    padding: 5px;
+  }
+
+</style>
+
 <head>
   <title>GitHub Branch Name Generator</title>
 </head>
 
 <body>
-  <h1>GitHub Branch Name Generator</h1>
-  <button id="generate-button">Generate branch name</button>
+  <p>Generate a branch name from the current GitHub issue:</p>
+  <button id="generate-button">Copy branch name</button>
 
   <script src="./clipboard-helper.js"></script>
   <script src="./popup.js"></script>

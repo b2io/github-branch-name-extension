@@ -9,22 +9,32 @@ function isGitHubIssueUrl(url) {
 }
 
 function updateBranchName(tabId) {
-  chrome.tabs.sendMessage(tabId, {}, name => {
-    branchName = name;
+  chrome.tabs.sendMessage(tabId, {}, results => {
+    if (!results && chrome.runtime.lastError) {
+      console.log(`Error: ${chrome.runtime.lastError}`);
+      return;
+    }
+
+    branchName = results;
   });
 }
 
 chrome.tabs.onUpdated.addListener(function(tabId, change, tab) {
-  if (isGitHubIssueUrl(tab.url)) chrome.pageAction.show(tabId);
-  else chrome.pageAction.hide(tabId);
+  if (change.status !== "complete") return;
 
-  if (change.status === "complete") {
+  if (isGitHubIssueUrl(tab.url)) {
+    chrome.pageAction.show(tabId);
     updateBranchName(tabId);
+  } else {
+    chrome.pageAction.hide(tabId);
   }
 });
 
 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
   var currentTab = tabs[0];
+  if (currentTab !== undefined || currentTab !== null) return;
 
-  updateBranchName(currentTab.id);
+  if (isGitHubIssueUrl(currentTab.url)) {
+    updateBranchName(currentTab.id);
+  }
 });

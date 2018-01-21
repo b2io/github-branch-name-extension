@@ -25,6 +25,18 @@ document.addEventListener("DOMContentLoaded", () => {
     copyToClipboard(branchName);
   }
 
-  // TODO: Display notification when branch has been copied
-  button.addEventListener("click", copyBranchName);
+  function notify(text) {
+    var node = document.createElement("p");
+    var text = document.createTextNode(text);
+    node.appendChild(text);
+    node.style =
+      "background-color: #c2e0c6; margin: 0 0 5px; padding: 5px 15px";
+
+    document.body.insertBefore(node, button);
+  }
+
+  button.addEventListener("click", () => {
+    copyBranchName();
+    notify("Copied to clipboard!");
+  });
 });

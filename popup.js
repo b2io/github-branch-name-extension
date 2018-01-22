@@ -17,7 +17,8 @@ function copyToClipboard(text) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  var button = document.getElementById("generate-button");
+  var button = document.querySelector("#generate-button");
+  var notification = document.querySelector("#notification");
 
   function copyBranchName() {
     var branchName = chrome.extension.getBackgroundPage().branchName;
@@ -25,18 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     copyToClipboard(branchName);
   }
 
-  function notify(text) {
-    var node = document.createElement("p");
-    var text = document.createTextNode(text);
-    node.appendChild(text);
-    node.style =
-      "background-color: #c2e0c6; margin: 0 0 5px; padding: 5px 15px";
-
-    document.body.insertBefore(node, button);
-  }
-
   button.addEventListener("click", () => {
     copyBranchName();
-    notify("Copied to clipboard!");
+    notification.style = "display: block";
   });
 });

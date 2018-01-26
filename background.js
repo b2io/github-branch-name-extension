@@ -32,7 +32,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, change, tab) {
 
 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
   var currentTab = tabs[0];
-  if (currentTab !== undefined || currentTab !== null) return;
+  if (!currentTab || !currentTab.url) return;
 
   if (isGitHubIssueUrl(currentTab.url)) {
     updateBranchName(currentTab.id);

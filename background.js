@@ -19,12 +19,19 @@ function updateBranchName(tabId) {
   });
 }
 
+function updateBranchNameButton(tabId) {
+  chrome.tabs.sendMessage(tabId, {
+    addButton: true
+  });
+}
+
 chrome.tabs.onUpdated.addListener(function(tabId, change, tab) {
   if (change.status !== "complete") return;
 
   if (isGitHubIssueUrl(tab.url)) {
     chrome.pageAction.show(tabId);
     updateBranchName(tabId);
+    updateBranchNameButton(tabId);
   } else {
     chrome.pageAction.hide(tabId);
   }

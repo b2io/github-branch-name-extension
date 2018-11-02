@@ -8,8 +8,8 @@ function isGitHubIssueUrl(url) {
   return urlRegex.test(url);
 }
 
-function updateBranchName(tabId) {
-  chrome.tabs.sendMessage(tabId, {}, results => {
+function notifyContentOfUrlChange(tabId, addButton) {
+  chrome.tabs.sendMessage(tabId, { addButton }, results => {
     if (!results && chrome.runtime.lastError) {
       console.log(`Error: ${chrome.runtime.lastError}`);
       return;
@@ -19,19 +19,12 @@ function updateBranchName(tabId) {
   });
 }
 
-function updateBranchNameButton(tabId) {
-  chrome.tabs.sendMessage(tabId, {
-    addButton: true
-  });
-}
-
 chrome.tabs.onUpdated.addListener(function(tabId, change, tab) {
   if (change.status !== "complete") return;
 
   if (isGitHubIssueUrl(tab.url)) {
     chrome.pageAction.show(tabId);
-    updateBranchName(tabId);
-    updateBranchNameButton(tabId);
+    notifyContentOfUrlChange(tabId, true);
   } else {
     chrome.pageAction.hide(tabId);
   }
@@ -42,6 +35,6 @@ chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
   if (currentTab !== undefined || currentTab !== null) return;
 
   if (isGitHubIssueUrl(currentTab.url)) {
-    updateBranchName(currentTab.id);
+    notifyContentOfUrlChange(currentTab.id);
   }
 });

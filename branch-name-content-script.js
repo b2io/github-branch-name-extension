@@ -35,8 +35,7 @@ function addBranchNameButton() {
   var branchNameButton = document.createElement("button");
   branchNameButton.id = BUTTON_ID;
   branchNameButton.innerText = "Branch Name";
-  branchNameButton.classList.add("btn");
-  branchNameButton.classList.add("btn-sm");
+  branchNameButton.classList.add("btn", "btn-sm");
 
   branchNameButton.addEventListener(
     "click",

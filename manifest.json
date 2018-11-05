@@ -1,8 +1,7 @@
 {
   "manifest_version": 2,
   "name": "GitHub Branch Name Generator",
-  "description":
-    "Extension for generating a GitHub branch name from an issue's details and copying it to the clipboard.",
+  "description": "Extension for generating a GitHub branch name from an issue's details and copying it to the clipboard.",
   "version": "1.0",
   "icons": {
     "16": "branch-icon-16.png",
@@ -19,7 +18,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.github.com/*"],
-      "js": ["branch-name-content-script.js"]
+      "js": ["common.js", "branch-name-content-script.js"]
     }
   ],
 
